@@ -16,13 +16,18 @@
     <meta name="description" content="" />
     
     <title>
-      test_image - 我的博客
+      Hello World - 我的博客
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/style/style.css">
   </head>
   <body>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+    </div>
     
     <div id="fixed-menu-wrap">
       <span class="iconfont icon-sousuo search-box menu-reset"></span>
@@ -163,11 +168,11 @@
         <article class="post-entry">
     <div class="header">
       
-      <div class="title">test_image</div>
+      <div class="title">Hello World</div>
       <div class="meta">
         <span class="item">
           <span class="iconfont icon-time-circle"></span>
-          <span>2019/12/08</span>
+          <span>2019/12/07</span>
         </span>
 
         
@@ -179,7 +184,19 @@
       <div>
       </div>
     </div>
-    <p><a href="501A10A6-C064-44F4-90BC-9FCA24FBA586.jpeg" data-caption data-fancybox="images"><img src="501A10A6-C064-44F4-90BC-9FCA24FBA586.jpeg" alt></a></p>
+    <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start">Quick Start<a class="post-anchor" href="#Quick-Start"></a></h2><h3 id="Create-a-new-post">Create a new post<a class="post-anchor" href="#Create-a-new-post"></a></h3><pre><code class="hljs bash">$ hexo new <span class="hljs-string">"My New Post"</span></code></pre>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server">Run server<a class="post-anchor" href="#Run-server"></a></h3><pre><code class="hljs bash">$ hexo server</code></pre>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files">Generate static files<a class="post-anchor" href="#Generate-static-files"></a></h3><pre><code class="hljs bash">$ hexo generate</code></pre>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites">Deploy to remote sites<a class="post-anchor" href="#Deploy-to-remote-sites"></a></h3><pre><code class="hljs bash">$ hexo deploy</code></pre>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
 
   
@@ -206,10 +223,10 @@
   <div class="post-guide">
     <div class="item left">
         
+          <a href="/20191208c++/hello_world">Hello World</a>
+        
     </div>
     <div class="item right">
-        
-          <a href="/20191208c++/smart_pointer/">智能指针</a>
         
     </div>
   </div>
@@ -221,7 +238,7 @@
       本文作者：<a href="/https:/zengliangju.github.io">Zengliangju</a>
     </div>
     <div class="link">
-      永久链接：<a href="/https:/zengliangju.github.io/20191208test-image/">/https:/zengliangju.github.io/20191208test-image/</a>
+      永久链接：<a href="/https:/zengliangju.github.io/20191207hello-world">/https:/zengliangju.github.io/20191207hello-world</a>
     </div>
     <div class="declare">
       版权声明：本文首发于<a href="/https:/zengliangju.github.io">Zengliangju</a>的博客，转载请注明出处！
