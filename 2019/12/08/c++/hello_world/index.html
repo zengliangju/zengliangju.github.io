@@ -16,18 +16,13 @@
     <meta name="description" content="" />
     
     <title>
-      智能指针 - 我的博客
+      Hello World - 我的博客
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/style/style.css">
   </head>
   <body>
-    
-    <div id="post-toc" class="animated hiddenToc hide">
-      <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C-11-智能指针-unique-ptr、shared-ptr-与-weak-ptr"><span class="toc-text">C++ 11 智能指针 unique_ptr、shared_ptr 与 weak_ptr</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-unique-ptr"><span class="toc-text">1. unique_ptr</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现方式"><span class="toc-text">实现方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#举例"><span class="toc-text">举例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-shared-ptr"><span class="toc-text">2. shared_ptr</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现方式-1"><span class="toc-text">实现方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#举例-1"><span class="toc-text">举例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-weak-ptr"><span class="toc-text">3. weak_ptr</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现方式-2"><span class="toc-text">实现方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#举例-2"><span class="toc-text">举例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-auto-ptr"><span class="toc-text">4. auto_ptr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-总结"><span class="toc-text">5. 总结</span></a></li></ol></li></ol>
-    </div>
     
     <div id="fixed-menu-wrap">
       <span class="iconfont icon-sousuo search-box menu-reset"></span>
@@ -168,7 +163,7 @@
         <article class="post-entry">
     <div class="header">
       
-      <div class="title">智能指针</div>
+      <div class="title">Hello World</div>
       <div class="meta">
         <span class="item">
           <span class="iconfont icon-time-circle"></span>
@@ -206,13 +201,11 @@
       <div>
       </div>
     </div>
-    <h1 id="C-11-智能指针-unique-ptr、shared-ptr-与-weak-ptr">C++ 11 智能指针 unique_ptr、shared_ptr 与 weak_ptr<a class="post-anchor" href="#C-11-智能指针-unique-ptr、shared-ptr-与-weak-ptr"></a></h1><p>C++ 11 中有 unique_ptr、shared_ptr 与 weak_ptr 等智能指针（smart pointer），定义在 <memory> 中，用于对动态资源进行管理，保证任何情况下，已构造的对象最终会销毁。</memory></p>
-<h2 id="1-unique-ptr">1. unique_ptr<a class="post-anchor" href="#1-unique-ptr"></a></h2><p>unique_ptr 持有对对象的独有权，同一时刻只能有一个 unique_ptr 指向给定对象。</p>
-<h3 id="实现方式">实现方式<a class="post-anchor" href="#实现方式"></a></h3><h3 id="举例">举例<a class="post-anchor" href="#举例"></a></h3><h2 id="2-shared-ptr">2. shared_ptr<a class="post-anchor" href="#2-shared-ptr"></a></h2><p>shared_ptr 允许多个智能指针共享拥有同一堆分配对象的内存，一旦最后一个这样的指针被销毁，这个对象会被自动删除。</p>
-<h3 id="实现方式-1">实现方式<a class="post-anchor" href="#实现方式-1"></a></h3><h3 id="举例-1">举例<a class="post-anchor" href="#举例-1"></a></h3><h2 id="3-weak-ptr">3. weak_ptr<a class="post-anchor" href="#3-weak-ptr"></a></h2><p>weak_ptr 可以从一个 shared_ptr 或另一个 weak_ptr 对象构造，但并不拥有该内存，即 weak_ptr 的构造和析构不会增加和减少对象的引用计数。</p>
-<h3 id="实现方式-2">实现方式<a class="post-anchor" href="#实现方式-2"></a></h3><h3 id="举例-2">举例<a class="post-anchor" href="#举例-2"></a></h3><h2 id="4-auto-ptr">4. auto_ptr<a class="post-anchor" href="#4-auto-ptr"></a></h2><p>已被 deprecated，被 unique_ptr 替代。</p>
-<h2 id="5-总结">5. 总结<a class="post-anchor" href="#5-总结"></a></h2><p><a href="https://github.com/zengliangju/blog/blob/master/images/501A10A6-C064-44F4-90BC-9FCA24FBA586.jpeg" target="_blank" rel="noopener" data-caption="爱人" data-fancybox="images"><img src="https://github.com/zengliangju/blog/blob/master/images/501A10A6-C064-44F4-90BC-9FCA24FBA586.jpeg" alt="爱人"></a></p>
-<p><a href="../images/501A10A6-C064-44F4-90BC-9FCA24FBA586.jpeg" data-caption="爱人" data-fancybox="images"><img src="../images/501A10A6-C064-44F4-90BC-9FCA24FBA586.jpeg" alt="爱人"></a></p>
+    <pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+  <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Hello world!"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+&#125;</code></pre>
 
 
   
@@ -239,10 +232,12 @@
   <div class="post-guide">
     <div class="item left">
         
+          <a href="/2019/12/08/c++/smart_pointer/">智能指针</a>
+        
     </div>
     <div class="item right">
         
-          <a href="/20191208c++/hello_world/">Hello World</a>
+          <a href="/2019/12/07/hello-world/">Hello World</a>
         
     </div>
   </div>
@@ -254,7 +249,7 @@
       本文作者：<a href="/https:/zengliangju.github.io">Zengliangju</a>
     </div>
     <div class="link">
-      永久链接：<a href="/https:/zengliangju.github.io/20191208c++/smart_pointer/">/https:/zengliangju.github.io/20191208c++/smart_pointer/</a>
+      永久链接：<a href="/https:/zengliangju.github.io/2019/12/08/c++/hello_world/">/https:/zengliangju.github.io/2019/12/08/c++/hello_world/</a>
     </div>
     <div class="declare">
       版权声明：本文首发于<a href="/https:/zengliangju.github.io">Zengliangju</a>的博客，转载请注明出处！
