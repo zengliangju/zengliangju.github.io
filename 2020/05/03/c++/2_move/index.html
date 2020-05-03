@@ -16,7 +16,7 @@
     <meta name="description" content="" />
     
     <title>
-      Git 常用命令 - 我的博客
+      C++ move - 我的博客
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/images/logo.ico" type="image/x-icon" />
@@ -24,11 +24,6 @@
     <link rel="stylesheet" href="/style/style.css">
   </head>
   <body>
-    
-    <div id="post-toc" class="animated hiddenToc hide">
-      <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-branch"><span class="toc-text">1. branch</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-删除本地分支"><span class="toc-text">1.1 删除本地分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-删除远程分支"><span class="toc-text">1.2 删除远程分支</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-clone"><span class="toc-text">2. clone</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-clone子模块"><span class="toc-text">2.1 clone子模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-http-clone带上密码"><span class="toc-text">2.2 http clone带上密码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-push-gerrit"><span class="toc-text">3. push gerrit</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-不需要review（慎用）"><span class="toc-text">3.1 不需要review（慎用）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-需要review"><span class="toc-text">3.2 需要review</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-rebase"><span class="toc-text">4. rebase</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-场景1-合并多次commit"><span class="toc-text">4.1 场景1 合并多次commit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-场景2-合并分支"><span class="toc-text">4.2 场景2 合并分支</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-remote"><span class="toc-text">5. remote</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-添加远程地址"><span class="toc-text">5.1 添加远程地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-增加远程地址的时候带上密码"><span class="toc-text">5.2 增加远程地址的时候带上密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-删除远程地址"><span class="toc-text">5.3 删除远程地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-重命名远程地址"><span class="toc-text">5.4 重命名远程地址</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-Tag"><span class="toc-text">6. Tag</span></a></li></ol>
-    </div>
     
     <div id="fixed-menu-wrap">
       <span class="iconfont icon-sousuo search-box menu-reset"></span>
@@ -169,15 +164,15 @@
         <article class="post-entry">
     <div class="header">
       
-      <div class="title">Git 常用命令</div>
+      <div class="title">C++ move</div>
       <div class="meta">
         <span class="item">
           <span class="iconfont icon-time-circle"></span>
-          <span>2020/05/02</span>
+          <span>2020/05/03</span>
         </span>
 
         
-          <span class="item leancloud-visitors" id="/2020/05/02/git/all/" data-flag-title="Git 常用命令">
+          <span class="item leancloud-visitors" id="/2020/05/03/c++/2_move/" data-flag-title="C++ move">
             <span class="iconfont icon-eye1"></span>
             <span class="leancloud-visitors-count"></span>
           </span>
@@ -202,7 +197,7 @@
             <span>
                 
                   
-                    <a href="/tags/Git">Git</a>
+                    <a href="/tags/C++">C++</a>
                   
                 
             </span>
@@ -212,25 +207,40 @@
       <div>
       </div>
     </div>
-    <p>[TOC]</p>
-<h1 id="1-branch">1. branch<a class="post-anchor" href="#1-branch"></a></h1><h2 id="1-1-删除本地分支">1.1 删除本地分支<a class="post-anchor" href="#1-1-删除本地分支"></a></h2><p><code>git branch -d branch_name</code></p>
-<h2 id="1-2-删除远程分支">1.2 删除远程分支<a class="post-anchor" href="#1-2-删除远程分支"></a></h2><p><code>git branch -d -r origin/branch_name</code></p>
-<p><code>git push origin :branch_name</code></p>
-<h1 id="2-clone">2. clone<a class="post-anchor" href="#2-clone"></a></h1><h2 id="2-1-clone子模块">2.1 clone子模块<a class="post-anchor" href="#2-1-clone子模块"></a></h2><p><code>git clone --recursive https://github.com/foo/bar.git</code></p>
-<h2 id="2-2-http-clone带上密码">2.2 http clone带上密码<a class="post-anchor" href="#2-2-http-clone带上密码"></a></h2><p><code>git clone http://yourname:password@github.com/foo/bar.git</code></p>
-<h1 id="3-push-gerrit">3. push gerrit<a class="post-anchor" href="#3-push-gerrit"></a></h1><h2 id="3-1-不需要review（慎用）">3.1 <u>不需要review（慎用）</u><a class="post-anchor" href="#3-1-不需要review（慎用）"></a></h2><p><code>git push gerrit HEAD:refs/heads/master</code></p>
-<h2 id="3-2-需要review">3.2 <strong>需要review</strong><a class="post-anchor" href="#3-2-需要review"></a></h2><p><code>git push gerrit HEAD:refs/for/master</code></p>
-<h1 id="4-rebase">4. rebase<a class="post-anchor" href="#4-rebase"></a></h1><h2 id="4-1-场景1-合并多次commit">4.1 场景1 合并多次commit<a class="post-anchor" href="#4-1-场景1-合并多次commit"></a></h2><p>合并最近的4次commit</p>
-<p><code>git rebase -i HEAD~4</code></p>
-<h2 id="4-2-场景2-合并分支">4.2 场景2 合并分支<a class="post-anchor" href="#4-2-场景2-合并分支"></a></h2><p>将当前分支合并进master分支</p>
-<p><code>git rebase master</code></p>
-<h1 id="5-remote">5. remote<a class="post-anchor" href="#5-remote"></a></h1><h2 id="5-1-添加远程地址">5.1 添加远程地址<a class="post-anchor" href="#5-1-添加远程地址"></a></h2><p><code>git remote add origin http://github.com/foo/bar.git</code></p>
-<h2 id="5-2-增加远程地址的时候带上密码">5.2 增加远程地址的时候带上密码<a class="post-anchor" href="#5-2-增加远程地址的时候带上密码"></a></h2><p><code>git remote add origin http://yourname:password@git.oschina.net/name/project.git</code></p>
-<h2 id="5-3-删除远程地址">5.3 删除远程地址<a class="post-anchor" href="#5-3-删除远程地址"></a></h2><p><code>git remote rm origin</code></p>
-<h2 id="5-4-重命名远程地址">5.4 重命名远程地址<a class="post-anchor" href="#5-4-重命名远程地址"></a></h2><p><code>git remote rename origin gerrit</code></p>
-<h1 id="6-Tag">6. Tag<a class="post-anchor" href="#6-Tag"></a></h1><p><code>git tag -l</code></p>
-<p><code>git tag -a v1.4 -m &#39;my version 1.4&#39;</code></p>
-<p><code>git push orign v1.4</code></p>
+    <p>举例：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;		// std::cout</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;utility&gt;		// std::move</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;			// std::vector</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;			// std::string</span></span>
+ 
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> str = <span class="hljs-string">"Hello"</span>;
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>&gt; v;
+ 
+    <span class="hljs-comment">// 使用 push_back(const T&amp;) 重载，</span>
+    <span class="hljs-comment">// 表示我们将带来复制 str 的成本</span>
+    v.push_back(str);
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"After copy, str is \""</span> &lt;&lt; str &lt;&lt; <span class="hljs-string">"\"\n"</span>;
+ 
+    <span class="hljs-comment">// 使用右值引用 push_back(T&amp;&amp;) 重载，</span>
+    <span class="hljs-comment">// 表示不复制字符串；而是</span>
+    <span class="hljs-comment">// str 的内容被移动进 vector</span>
+    <span class="hljs-comment">// 这个开销比较低，但也意味着 str 现在可能为空。</span>
+    v.push_back(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">move</span>(str));
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"After move, str is \""</span> &lt;&lt; str &lt;&lt; <span class="hljs-string">"\"\n"</span>;
+ 
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"The contents of the vector are \""</span> &lt;&lt; v[<span class="hljs-number">0</span>]
+                                         &lt;&lt; <span class="hljs-string">"\", \""</span> &lt;&lt; v[<span class="hljs-number">1</span>] &lt;&lt; <span class="hljs-string">"\"\n"</span>;
+&#125;</code></pre>
+
+<p>输出：</p>
+<pre><code class="hljs shell">After copy, str is "Hello"
+After move, str is ""
+The contents of the vector are "Hello", "Hello"</code></pre>
+
+
+
 
 
   
@@ -257,12 +267,10 @@
   <div class="post-guide">
     <div class="item left">
         
-          <a href="/2020/05/02/readme/">花终将开</a>
-        
     </div>
     <div class="item right">
         
-          <a href="/2019/12/13/lucene_cpp/1_startup/">Lucene C++ 版本实现</a>
+          <a href="/2020/05/02/readme/">花终将开</a>
         
     </div>
   </div>
@@ -274,7 +282,7 @@
       本文作者：<a href="https://zengliangju.github.io">孤影渐苍茫、</a>
     </div>
     <div class="link">
-      永久链接：<a href="https://zengliangju.github.io/2020/05/02/git/all/">https://zengliangju.github.io/2020/05/02/git/all/</a>
+      永久链接：<a href="https://zengliangju.github.io/2020/05/03/c++/2_move/">https://zengliangju.github.io/2020/05/03/c++/2_move/</a>
     </div>
     <div class="declare">
       版权声明：本文首发于<a href="https://zengliangju.github.io">孤影渐苍茫、</a>的博客，转载请注明出处！

@@ -16,19 +16,14 @@
     <meta name="description" content="" />
     
     <title>
-      智能指针 - 我的博客
+      标签 - 我的博客
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/images/logo.ico" type="image/x-icon" />
-    <script data-ad-client="ca-pub-6202249477164385" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script data-ad-client="" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <link rel="stylesheet" href="/style/style.css">
   </head>
   <body>
-    
-    <div id="post-toc" class="animated hiddenToc hide">
-      <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C-11-智能指针-unique-ptr、shared-ptr-与-weak-ptr"><span class="toc-text">C++ 11 智能指针 unique_ptr、shared_ptr 与 weak_ptr</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-unique-ptr"><span class="toc-text">1. unique_ptr</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现方式"><span class="toc-text">实现方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#举例"><span class="toc-text">举例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-shared-ptr"><span class="toc-text">2. shared_ptr</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现方式-1"><span class="toc-text">实现方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#举例-1"><span class="toc-text">举例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-weak-ptr"><span class="toc-text">3. weak_ptr</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现方式-2"><span class="toc-text">实现方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#举例-2"><span class="toc-text">举例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-auto-ptr"><span class="toc-text">4. auto_ptr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-总结"><span class="toc-text">5. 总结</span></a></li></ol></li></ol>
-    </div>
     
     <div id="fixed-menu-wrap">
       <span class="iconfont icon-sousuo search-box menu-reset"></span>
@@ -71,7 +66,7 @@
           分类
         </a>
         
-        <a href="/tags" class="">
+        <a href="/tags" class="current">
           标签
         </a>
         
@@ -125,7 +120,7 @@
             分类
           </a>
           
-          <a href="/tags" class="">
+          <a href="/tags" class="current">
             标签
           </a>
           
@@ -166,122 +161,42 @@
     </div>
     <div id="container">
       <div class="main animated bounceInRight delay-0.7s">
-        <article class="post-entry">
-    <div class="header">
-      
-      <div class="title">智能指针</div>
-      <div class="meta">
-        <span class="item">
-          <span class="iconfont icon-time-circle"></span>
-          <span>2019/12/08</span>
-        </span>
-
-        
-          <span class="item leancloud-visitors" id="/2019/12/08/c++/smart_pointer/" data-flag-title="智能指针">
-            <span class="iconfont icon-eye1"></span>
-            <span class="leancloud-visitors-count"></span>
-          </span>
-        
-
-         
-        <span class="item">
-          <span class="iconfont icon-folder"></span>
-          <span>
-              
-                
-                  <a href="/categories/学习">学习</a>
-                
-              
-          </span>
-        </span>
-        
-        
-         
-          <span class="item">
-            <span class="iconfont icon-tag1"></span>
-            <span>
-                
-                  
-                    <a href="/tags/CPP">CPP</a>
-                  
-                
-            </span>
-          </span>
-         
-      </div>
-      <div>
-      </div>
-    </div>
-    <h1 id="C-11-智能指针-unique-ptr、shared-ptr-与-weak-ptr">C++ 11 智能指针 unique_ptr、shared_ptr 与 weak_ptr<a class="post-anchor" href="#C-11-智能指针-unique-ptr、shared-ptr-与-weak-ptr"></a></h1><p>C++ 11 中有 unique_ptr、shared_ptr 与 weak_ptr 等智能指针（smart pointer），定义在 <memory> 中，用于对动态资源进行管理，保证任何情况下，已构造的对象最终会销毁。</memory></p>
-<h2 id="1-unique-ptr">1. unique_ptr<a class="post-anchor" href="#1-unique-ptr"></a></h2><p>unique_ptr 持有对对象的独有权，同一时刻只能有一个 unique_ptr 指向给定对象。</p>
-<h3 id="实现方式">实现方式<a class="post-anchor" href="#实现方式"></a></h3><h3 id="举例">举例<a class="post-anchor" href="#举例"></a></h3><h2 id="2-shared-ptr">2. shared_ptr<a class="post-anchor" href="#2-shared-ptr"></a></h2><p>shared_ptr 允许多个智能指针共享拥有同一堆分配对象的内存，一旦最后一个这样的指针被销毁，这个对象会被自动删除。</p>
-<h3 id="实现方式-1">实现方式<a class="post-anchor" href="#实现方式-1"></a></h3><h3 id="举例-1">举例<a class="post-anchor" href="#举例-1"></a></h3><h2 id="3-weak-ptr">3. weak_ptr<a class="post-anchor" href="#3-weak-ptr"></a></h2><p>weak_ptr 可以从一个 shared_ptr 或另一个 weak_ptr 对象构造，但并不拥有该内存，即 weak_ptr 的构造和析构不会增加和减少对象的引用计数。</p>
-<h3 id="实现方式-2">实现方式<a class="post-anchor" href="#实现方式-2"></a></h3><h3 id="举例-2">举例<a class="post-anchor" href="#举例-2"></a></h3><h2 id="4-auto-ptr">4. auto_ptr<a class="post-anchor" href="#4-auto-ptr"></a></h2><p>已被 deprecated，被 unique_ptr 替代。</p>
-<h2 id="5-总结">5. 总结<a class="post-anchor" href="#5-总结"></a></h2>
-
-  
-    <div class="post-reward">
-    <div id="reward-button">打赏</div>
-      <div id="qr">
-        <div class="wrap">
-            
-            <div class="bg-wrap">
-              <a href="/images/logo_zeng.jpeg" target="_block" class="bg" style="background-image:url('/images/logo_zeng.jpeg')"></a>
-              支付宝
-            </div>
-            
-            
-            <div class="bg-wrap">
-                <a href="/images/logo_zeng.jpeg" target="_block" class="bg" style="background-image:url('/images/logo_zeng.jpeg')"></a>
-              微信
-            </div>
-            
+        <div id="archives">
+    
+        <div class="title">
+            标签 - C++
         </div>
-      </div>
-    </div>
-  
-  <div class="post-guide">
-    <div class="item left">
-        
-          <a href="/2019/12/13/lucene_cpp/1_startup/">Lucene C++ 版本实现</a>
-        
-    </div>
-    <div class="item right">
-        
-    </div>
-  </div>
+    
 
-  
-  <div class="google-ads">
-    <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-format="fluid"
-        data-ad-layout-key="-fb+5w+4e-db+86"
-        data-ad-client="ca-pub-6202249477164385"
-        data-ad-slot="8288106873"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </div>
-  
 
-  <div class="post-copyright">
-    <div class="auth">
-      本文作者：<a href="https://zengliangju.github.io">孤影渐苍茫、</a>
-    </div>
-    <div class="link">
-      永久链接：<a href="https://zengliangju.github.io/2019/12/08/c++/smart_pointer/">https://zengliangju.github.io/2019/12/08/c++/smart_pointer/</a>
-    </div>
-    <div class="declare">
-      版权声明：本文首发于<a href="https://zengliangju.github.io">孤影渐苍茫、</a>的博客，转载请注明出处！
-    </div>
-  </div>
 
-  <div id="comment"></div>
 
-  
-  
-</article>
+    
+    
+    <section class="wrap">
+        <div class="meta">
+            <a href="/archives/2020" >
+                2020
+            </a>
+        </div>
+        <div class="year">
+            
+            <article class="item">
+            <a href="/2020/05/03/c++/2_move/" title="C++ move">
+                <span>2020/05/03</span>
+                <span>C++ move</span>
+            </a>
+            </article>
+            
+    
+        </div>
+    </section>
+      
+<div class="paginator">
+    <span class="page-number current">1</span>
+</div>
+</div>
+
         <footer>
           <div class="copyright">
             ©2020
@@ -296,7 +211,7 @@
   
 </html>
 <script type="text/javascript">
-                  window.HUHU_CONFIG = JSON.parse("{\"share\":\"分享\",\"valine\":{\"API_ID\":\"uxrbYLudfhTYR8V7WLkqpXbg-gzGzoHsz\",\"API_KEY\":\"6H3IdcYi3JSinSMNKQrrcU4o\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/11/07\",\"site_id\":\"17966763\",\"access_token\":\"G2O7Qq0cnumS12FCW9KUeOQBm6EjsPp0\"}}")
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":\"分享\",\"valine\":{\"API_ID\":\"uxrbYLudfhTYR8V7WLkqpXbg-gzGzoHsz\",\"API_KEY\":\"6H3IdcYi3JSinSMNKQrrcU4o\"},\"service_worker\":{\"open\":false}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
     
     window.loadJs = function(d, m, a) {
