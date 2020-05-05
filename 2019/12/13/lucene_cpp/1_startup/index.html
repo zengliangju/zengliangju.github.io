@@ -16,7 +16,7 @@
     <meta name="description" content="" />
     
     <title>
-      Lucene C++ 版本实现 - 我的博客
+      Lucene C++ 版本实现（一）前期准备 - 我的博客
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/images/logo.ico" type="image/x-icon" />
@@ -27,7 +27,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目启动"><span class="toc-text">项目启动</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lucene-1-0-1"><span class="toc-text">Lucene 1.0.1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#目录结构"><span class="toc-text">目录结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工具"><span class="toc-text">工具</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目启动"><span class="toc-text">项目启动</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lucene-1-0-1"><span class="toc-text">Lucene 1.0.1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#目录结构"><span class="toc-text">目录结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#编译命令"><span class="toc-text">编译命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工具"><span class="toc-text">工具</span></a></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -169,7 +169,7 @@
         <article class="post-entry">
     <div class="header">
       
-      <div class="title">Lucene C++ 版本实现</div>
+      <div class="title">Lucene C++ 版本实现（一）前期准备</div>
       <div class="meta">
         <span class="item">
           <span class="iconfont icon-time-circle"></span>
@@ -177,7 +177,7 @@
         </span>
 
         
-          <span class="item leancloud-visitors" id="/2019/12/13/lucene_cpp/1_startup/" data-flag-title="Lucene C++ 版本实现">
+          <span class="item leancloud-visitors" id="/2019/12/13/lucene_cpp/1_startup/" data-flag-title="Lucene C++ 版本实现（一）前期准备">
             <span class="iconfont icon-eye1"></span>
             <span class="leancloud-visitors-count"></span>
           </span>
@@ -222,7 +222,23 @@
     </div>
     <h1 id="项目启动">项目启动<a class="post-anchor" href="#项目启动"></a></h1><p>传闻，Lucene创始人花了一下午时间，写出了第一版的Lucene。而作为普通人的我，不想只站在山底下仰望大佬，也想尽力去追赶他们的身影。<br>于是，我便有了这个系列的想法，用C++去实现最早版本的Lucene。</p>
 <h1 id="Lucene-1-0-1">Lucene 1.0.1<a class="post-anchor" href="#Lucene-1-0-1"></a></h1><p><a href="https://github.com/apache/lucene-solr/tree/releases/lucene/1.0.1" target="_blank" rel="noopener">https://github.com/apache/lucene-solr/tree/releases/lucene/1.0.1</a></p>
-<h1 id="目录结构">目录结构<a class="post-anchor" href="#目录结构"></a></h1><h1 id="工具">工具<a class="post-anchor" href="#工具"></a></h1><ul>
+<h1 id="目录结构">目录结构<a class="post-anchor" href="#目录结构"></a></h1><pre><code class="hljs shell">build/
+include/
+lib/
+src/
+	analysis/
+	document/
+	index/
+	query_parser/
+	search/
+	store/
+	util/
+test/
+build.sh
+CMakeLists.txt</code></pre>
+
+<h1 id="编译命令">编译命令<a class="post-anchor" href="#编译命令"></a></h1><p><code>cd build &amp;&amp; cmake . &amp;&amp; ./lucene_cpp &amp;&amp; cd ..</code></p>
+<h1 id="工具">工具<a class="post-anchor" href="#工具"></a></h1><ul>
 <li>c++ 11</li>
 <li>cmake 3</li>
 <li>gtest</li>

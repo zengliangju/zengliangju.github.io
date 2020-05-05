@@ -16,7 +16,7 @@
     <meta name="description" content="" />
     
     <title>
-      C++ map/set unordered_map/unordered_set 的区别 - 我的博客
+      C++ 面向对象 virtual override final - 我的博客
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/images/logo.ico" type="image/x-icon" />
@@ -24,6 +24,11 @@
     <link rel="stylesheet" href="/style/style.css">
   </head>
   <body>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-virtual"><span class="toc-text">1. virtual</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-override"><span class="toc-text">2. override</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-final"><span class="toc-text">3. final</span></a></li></ol>
+    </div>
     
     <div id="fixed-menu-wrap">
       <span class="iconfont icon-sousuo search-box menu-reset"></span>
@@ -164,15 +169,15 @@
         <article class="post-entry">
     <div class="header">
       
-      <div class="title">C++ map/set unordered_map/unordered_set 的区别</div>
+      <div class="title">C++ 面向对象 virtual override final</div>
       <div class="meta">
         <span class="item">
           <span class="iconfont icon-time-circle"></span>
-          <span>2020/05/03</span>
+          <span>2020/05/05</span>
         </span>
 
         
-          <span class="item leancloud-visitors" id="/2020/05/03/c++/4_map_unordered_map/" data-flag-title="C++ map/set unordered_map/unordered_set 的区别">
+          <span class="item leancloud-visitors" id="/2020/05/05/c++/5_virtual_override_final/" data-flag-title="C++ 面向对象 virtual override final">
             <span class="iconfont icon-eye1"></span>
             <span class="leancloud-visitors-count"></span>
           </span>
@@ -207,44 +212,86 @@
       <div>
       </div>
     </div>
-    <blockquote>
-<p>注：下面的区别同样适用于 set 和 unordered_set</p>
+    <h1 id="1-virtual">1. virtual<a class="post-anchor" href="#1-virtual"></a></h1><blockquote>
+<p>虚函数是可在子类中覆盖其行为的成员函数。</p>
 </blockquote>
-<ol>
-<li><p>原理</p>
-<ul>
-<li>map 基于红黑树（一种非严格意义上的平衡二叉树），使用 operator &lt; 比较元素大小，选择合适的位置插入到红黑树。这棵树能自动排序，因此 map 中的数据都是有序的。</li>
-<li>unordered_map 基于哈希表。</li>
-</ul>
-</li>
-<li><p>时间复杂度</p>
-<ul>
-<li><p>map 搜索、插入和移除：<br>$$<br>O(lg(n))<br>$$</p>
-</li>
-<li><p>unordered_map 搜索、插入和移除：<br>$$<br>O(n)<br>$$</p>
-</li>
-</ul>
-</li>
-</ol>
-<ol start="3">
-<li><p>空间复杂度</p>
-<ul>
-<li>map &gt;  unordered_map</li>
-</ul>
-</li>
-<li><p>类比 java</p>
-<ul>
-<li>map ： java 中的 TreeMap</li>
-<li>unordered_map ： java 中的 HashMap</li>
-</ul>
-</li>
-<li><p>使用场景</p>
-<ul>
-<li>map ： 需要对 map 进行有序遍历</li>
-<li>unordered_map ： 仅需要查找，不需要有序遍历</li>
-</ul>
-</li>
-</ol>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Base</span> &#123;</span>
+   <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">f</span><span class="hljs-params">()</span> </span>&#123;
+       <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"base\n"</span>;
+   &#125;
+&#125;;
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Derived</span> :</span> Base &#123;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f</span><span class="hljs-params">()</span> override </span>&#123; <span class="hljs-comment">// 'override' 可选</span>
+        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"derived\n"</span>;
+    &#125;
+&#125;;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>&#123;
+    Base b;
+    Derived d;
+ 
+    <span class="hljs-comment">// 通过引用调用虚函数</span>
+    Base&amp; br = b; <span class="hljs-comment">// br 的类型是 Base&amp;</span>
+    Base&amp; dr = d; <span class="hljs-comment">// dr 的类型也是 Base&amp;</span>
+    br.f();       <span class="hljs-comment">// 打印 "base"</span>
+    dr.f();       <span class="hljs-comment">// 打印 "derived"</span>
+ 
+    <span class="hljs-comment">// 通过指针调用虚函数</span>
+    Base* bp = &amp;b; <span class="hljs-comment">// bp 的类型是 Base*</span>
+    Base* dp = &amp;d; <span class="hljs-comment">// dp 的类型也是 Base*</span>
+    bp-&gt;f();       <span class="hljs-comment">// 打印 "base"</span>
+    dp-&gt;f();       <span class="hljs-comment">// 打印 "derived"</span>
+ 
+    <span class="hljs-comment">// 非虚函数调用</span>
+    br.Base::f(); <span class="hljs-comment">// 打印 "base"</span>
+    dr.Base::f(); <span class="hljs-comment">// 打印 "base"</span>
+&#125;</code></pre>
+
+
+
+<h1 id="2-override">2. override<a class="post-anchor" href="#2-override"></a></h1><blockquote>
+<p>指定一个虚函数覆盖另一个虚函数。</p>
+</blockquote>
+<pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">A</span>
+&#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bar</span><span class="hljs-params">()</span></span>;
+&#125;;
+ 
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">B</span> :</span> A
+&#123;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> override</span>; <span class="hljs-comment">// 错误：B::foo 不覆盖 A::foo</span>
+                               <span class="hljs-comment">// （签名不匹配）</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> override</span>;       <span class="hljs-comment">// OK：B::foo 覆盖 A::foo</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bar</span><span class="hljs-params">()</span> override</span>;       <span class="hljs-comment">// 错误：A::bar 非虚</span>
+&#125;;</code></pre>
+
+
+
+<h1 id="3-final">3. final<a class="post-anchor" href="#3-final"></a></h1><blockquote>
+<p>指定某个虚函数不能在子类中被覆盖，或者某个类不能被子类继承。</p>
+</blockquote>
+<pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Base</span>
+&#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span></span>;
+&#125;;
+ 
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">A</span> :</span> Base
+&#123;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> final</span>;    <span class="hljs-comment">// Base::foo 被覆盖而 A::foo 是最终覆盖函数</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bar</span><span class="hljs-params">()</span> final</span>;    <span class="hljs-comment">// 错误： bar 不能为 final 因为它非虚</span>
+&#125;;
+ 
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">B</span> <span class="hljs-title">final</span> :</span> A       <span class="hljs-comment">// struct B 为 final</span>
+&#123;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> override</span>; <span class="hljs-comment">// 错误：foo 不能被覆盖，因为它在 A 中是 final</span>
+&#125;;
+ 
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">C</span> :</span> B             <span class="hljs-comment">// 错误：B 为 final</span>
+&#123;
+&#125;;</code></pre>
+
 
 
   
@@ -271,12 +318,10 @@
   <div class="post-guide">
     <div class="item left">
         
-          <a href="/2020/05/03/lucene_cpp/2_util/">Lucene C++ 版本实现（二）util</a>
-        
     </div>
     <div class="item right">
         
-          <a href="/2020/05/03/c++/3_dense_hash_map_set/">C++ dense_hash_map dense_hash_set</a>
+          <a href="/2020/05/03/lucene_cpp/2_util/">Lucene C++ 版本实现（二）util</a>
         
     </div>
   </div>
@@ -288,7 +333,7 @@
       本文作者：<a href="https://zengliangju.github.io">孤影渐苍茫、</a>
     </div>
     <div class="link">
-      永久链接：<a href="https://zengliangju.github.io/2020/05/03/c++/4_map_unordered_map/">https://zengliangju.github.io/2020/05/03/c++/4_map_unordered_map/</a>
+      永久链接：<a href="https://zengliangju.github.io/2020/05/05/c++/5_virtual_override_final/">https://zengliangju.github.io/2020/05/05/c++/5_virtual_override_final/</a>
     </div>
     <div class="declare">
       版权声明：本文首发于<a href="https://zengliangju.github.io">孤影渐苍茫、</a>的博客，转载请注明出处！
