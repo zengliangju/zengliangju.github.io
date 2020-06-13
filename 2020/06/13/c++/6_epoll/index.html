@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      C++ epoll - 我的博客
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/logo.ico" type="image/x-icon" />
+    <script data-ad-client="" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <link rel="stylesheet" href="/style/style.css">
+  </head>
+  <body>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/logo.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpeg')"></a>
+        <div class="author">孤影渐苍茫、</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">孤影渐苍茫、</div>
+          <a href="/" class="logo" style="background-image: url('/images/logo.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/zengliangju" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.zhihu.com/people/zengliangju" target="_block">
+              <span class="iconfont icon-zhihu"></span>
+            </a>
+            
+            <a href="https://weibo.com/u/2237867824" target="_block">
+              <span class="iconfont icon-weibo"></span>
+            </a>
+            
+            <a href="https://space.bilibili.com/6422219" target="_block">
+              <span class="iconfont icon-bilibili"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">C++ epoll</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/06/13</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2020/06/13/c++/6_epoll/" data-flag-title="C++ epoll">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/学习">学习</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/CPP">CPP</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <ol>
+<li>epoll的优点<ul>
+<li><strong>fd上限</strong>。支持的fd上限是最大可以打开文件的数目，这个数字一般远大于select的1024；</li>
+<li><strong>事件通知</strong>。通过epoll_ctl注册fd，一旦该fd就绪，内核就会采用类似callback的回调机制来激活该fd，epoll_wait便可以收到通知，而非select、poll的轮询机制；</li>
+<li><strong>减少内存拷贝</strong>。只在epoll_ctl时把current挂一遍（这一遍必不可少）并为每个fd指定一个回调函数，当设备就绪，唤醒等待队列上的等待者时，就会调用这个回调函数，而这个回调函数会把就绪的fd加入一个就绪链表）。epoll_wait的工作实际上就是在这个就绪链表中查看有没有就绪的fd（利用schedule_timeout()实现睡一会，判断一会的效果）。select或poll一样每次都把current轮流加入fd对应的设备等待队列中。</li>
+</ul>
+</li>
+<li>epoll的实现</li>
+</ol>
+<pre><code class="hljs c++"><span class="hljs-comment">// server.cpp</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/epoll.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/socket.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cassert&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fcntl.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;netinet/in.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;arpa/inet.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX_EVENTS 10</span>
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">setnonblocking</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sd)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">do_use_fd</span><span class="hljs-params">(<span class="hljs-keyword">int</span> fd)</span></span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">epoll_event</span> <span class="hljs-title">ev</span>, <span class="hljs-title">events</span>[<span class="hljs-title">MAX_EVENTS</span>];</span>
+    <span class="hljs-keyword">int</span> listen_sock, conn_sock, nfds, epollfd;
+
+    <span class="hljs-comment">/* Code to set up listening socket, 'listen_sock',
+        (socket(), bind(), listen()) omitted */</span>
+    &#123;
+        <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* ip = <span class="hljs-string">"0.0.0.0"</span>;
+        <span class="hljs-keyword">int</span> port = <span class="hljs-number">36363</span>;
+        sockaddr_in addr;
+        <span class="hljs-built_in">memset</span>(&amp;addr, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(addr));
+        addr.sin_family = AF_INET;
+        addr.sin_port = htons(port);
+        <span class="hljs-keyword">if</span>(inet_aton(ip, &amp;addr.sin_addr) == <span class="hljs-number">0</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+
+        <span class="hljs-comment">// create socket</span>
+        <span class="hljs-keyword">if</span>((listen_sock = socket(AF_INET, SOCK_STREAM, <span class="hljs-number">0</span>)) &lt; <span class="hljs-number">0</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+
+        <span class="hljs-keyword">if</span>(!setnonblocking(listen_sock))
+            <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+
+        <span class="hljs-comment">// bind socket</span>
+        <span class="hljs-keyword">if</span>(bind(listen_sock, (sockaddr*)&amp;addr, <span class="hljs-keyword">sizeof</span>(addr)) != <span class="hljs-number">0</span>)
+        &#123;
+            <span class="hljs-built_in">shutdown</span>(listen_sock, <span class="hljs-number">2</span>);
+	        <span class="hljs-built_in">close</span>(listen_sock);
+            <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+        &#125;
+
+        <span class="hljs-comment">// listen</span>
+        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">listen</span>(listen_sock, <span class="hljs-number">10</span>) != <span class="hljs-number">0</span>)
+        &#123;
+            <span class="hljs-built_in">shutdown</span>(listen_sock, <span class="hljs-number">2</span>);
+	        <span class="hljs-built_in">close</span>(listen_sock);
+            <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+        &#125;
+    &#125;
+
+    epollfd = epoll_create1(<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">if</span> (epollfd == <span class="hljs-number">-1</span>) &#123;
+        perror(<span class="hljs-string">"epoll_create1"</span>);
+        <span class="hljs-built_in">exit</span>(EXIT_FAILURE);
+    &#125;
+
+    ev.events = EPOLLIN;
+    ev.data.fd = listen_sock;
+    <span class="hljs-keyword">if</span> (epoll_ctl(epollfd, EPOLL_CTL_ADD, listen_sock, &amp;ev) == <span class="hljs-number">-1</span>) &#123;
+        perror(<span class="hljs-string">"epoll_ctl: listen_sock"</span>);
+        <span class="hljs-built_in">exit</span>(EXIT_FAILURE);
+    &#125;
+
+    <span class="hljs-keyword">for</span> (;;) &#123;
+        nfds = epoll_wait(epollfd, events, MAX_EVENTS, <span class="hljs-number">-1</span>);
+        <span class="hljs-keyword">if</span> (nfds == <span class="hljs-number">-1</span>) &#123;
+            perror(<span class="hljs-string">"epoll_wait"</span>);
+            <span class="hljs-built_in">exit</span>(EXIT_FAILURE);
+        &#125;
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> n = <span class="hljs-number">0</span>; n &lt; nfds; ++n) &#123;
+            <span class="hljs-keyword">if</span> (events[n].data.fd == listen_sock) &#123;
+                <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr</span> <span class="hljs-title">addr</span>;</span>
+                <span class="hljs-keyword">socklen_t</span> addrlen;
+                conn_sock = accept(listen_sock,
+                                    (struct sockaddr *) &amp;addr, &amp;addrlen);
+                <span class="hljs-keyword">if</span> (conn_sock == <span class="hljs-number">-1</span>) &#123;
+                    perror(<span class="hljs-string">"accept"</span>);
+                    <span class="hljs-built_in">exit</span>(EXIT_FAILURE);
+                &#125;
+                setnonblocking(conn_sock);
+                ev.events = EPOLLIN | EPOLLET;
+                ev.data.fd = conn_sock;
+                <span class="hljs-keyword">if</span> (epoll_ctl(epollfd, EPOLL_CTL_ADD, conn_sock,
+                            &amp;ev) == <span class="hljs-number">-1</span>) &#123;
+                    perror(<span class="hljs-string">"epoll_ctl: conn_sock"</span>);
+                    <span class="hljs-built_in">exit</span>(EXIT_FAILURE);
+                &#125;
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                do_use_fd(events[n].data.fd);
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">setnonblocking</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sd)</span> </span>&#123;
+    assert(sd &gt;= <span class="hljs-number">0</span>);
+
+    <span class="hljs-keyword">return</span> fcntl(sd, F_SETFL, fcntl(sd, F_GETFD, <span class="hljs-number">0</span>) | O_NONBLOCK)  == <span class="hljs-number">0</span>;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">do_use_fd</span><span class="hljs-params">(<span class="hljs-keyword">int</span> fd)</span> </span>&#123;
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"fd: "</span> &lt;&lt; fd &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+
+    <span class="hljs-built_in">shutdown</span>(fd, <span class="hljs-number">2</span>);
+    <span class="hljs-built_in">close</span>(fd);
+&#125;</code></pre>
+
+<pre><code class="hljs c++"><span class="hljs-comment">// client.cpp</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;arpa/inet.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/socket.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;netdb.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;strings.h&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> ADDRESS</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ADDRESS <span class="hljs-meta-string">"127.0.0.1"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> PORT</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> PORT 36363</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">int</span>                ret = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">int</span>                conn_fd;
+
+    <span class="hljs-keyword">if</span> ((conn_fd = socket(AF_INET, SOCK_STREAM, <span class="hljs-number">0</span>)) == <span class="hljs-number">-1</span>) &#123;
+	    perror(<span class="hljs-string">"Socket"</span>);
+	    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+	&#125;
+
+	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">server_addr</span> = &#123;</span> <span class="hljs-number">0</span> &#125;;
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(PORT);
+
+    ret = inet_pton(AF_INET, ADDRESS, &amp;server_addr.sin_addr);
+	<span class="hljs-keyword">if</span> (ret != <span class="hljs-number">1</span>) &#123;
+		<span class="hljs-keyword">if</span> (ret == <span class="hljs-number">-1</span>) &#123;
+			perror(<span class="hljs-string">"inet_pton"</span>);
+		&#125;
+		<span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>,
+		        <span class="hljs-string">"failed to convert address %s "</span>
+		        <span class="hljs-string">"to binary net address\n"</span>,
+		        ADDRESS);
+		<span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+	&#125;
+
+	<span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stdout</span>, <span class="hljs-string">"CONNECTING: address=%s port=%d\n"</span>, ADDRESS, PORT);
+
+    ret =
+	  <span class="hljs-built_in">connect</span>(conn_fd, (struct sockaddr*)&amp;server_addr, <span class="hljs-keyword">sizeof</span>(server_addr));
+	<span class="hljs-keyword">if</span> (ret == <span class="hljs-number">-1</span>) &#123;
+		perror(<span class="hljs-string">"connect"</span>);
+		<span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+	&#125;
+
+    <span class="hljs-comment">// After the connection has been properly established, we could go</span>
+	<span class="hljs-comment">// forward with `read(2)` and `write(2)` calls.</span>
+
+    ret = <span class="hljs-built_in">shutdown</span>(conn_fd, SHUT_RDWR);
+	<span class="hljs-keyword">if</span> (ret == <span class="hljs-number">-1</span>) &#123;
+		perror(<span class="hljs-string">"shutdown"</span>);
+		<span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+	&#125;
+
+    ret = <span class="hljs-built_in">close</span>(conn_fd);
+	<span class="hljs-keyword">if</span> (ret == <span class="hljs-number">-1</span>) &#123;
+		perror(<span class="hljs-string">"close"</span>);
+		<span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+	&#125;
+
+	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+
+<ol start="3">
+<li>编译</li>
+</ol>
+<pre><code class="hljs shell">[1] g++ server.cpp -o server.o
+[1] ./server.o</code></pre>
+
+<pre><code class="hljs shell">[2] g++ client.cpp -o client.o
+[2] ./client.o</code></pre>
+
+<ol start="4">
+<li>输出</li>
+</ol>
+<pre><code class="hljs shell">[1] fd: 5</code></pre>
+
+<pre><code class="hljs shell">[2] ONNECTING: address=127.0.0.1 port=36363</code></pre>
+
+
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/logo_zeng.jpeg" target="_block" class="bg" style="background-image:url('/images/logo_zeng.jpeg')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/logo_zeng.jpeg" target="_block" class="bg" style="background-image:url('/images/logo_zeng.jpeg')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/06/01/linux/8_perf/">linux/8_perf</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://zengliangju.github.io">孤影渐苍茫、</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://zengliangju.github.io/2020/06/13/c++/6_epoll/">https://zengliangju.github.io/2020/06/13/c++/6_epoll/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://zengliangju.github.io">孤影渐苍茫、</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2020
+            <a href="https://zengliangju.github.io">孤影渐苍茫、</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":\"分享\",\"valine\":{\"API_ID\":\"uxrbYLudfhTYR8V7WLkqpXbg-gzGzoHsz\",\"API_KEY\":\"6H3IdcYi3JSinSMNKQrrcU4o\"},\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 
