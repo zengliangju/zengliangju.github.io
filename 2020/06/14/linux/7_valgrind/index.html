@@ -16,7 +16,7 @@
     <meta name="description" content="" />
     
     <title>
-      C++ 面向对象 virtual override final - 我的博客
+      Linux C++ valgrind 内存分析 - 我的博客
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/images/logo.ico" type="image/x-icon" />
@@ -24,11 +24,6 @@
     <link rel="stylesheet" href="/style/style.css">
   </head>
   <body>
-    
-    <div id="post-toc" class="animated hiddenToc hide">
-      <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-virtual"><span class="toc-text">1. virtual</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-override"><span class="toc-text">2. override</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-final"><span class="toc-text">3. final</span></a></li></ol>
-    </div>
     
     <div id="fixed-menu-wrap">
       <span class="iconfont icon-sousuo search-box menu-reset"></span>
@@ -169,15 +164,15 @@
         <article class="post-entry">
     <div class="header">
       
-      <div class="title">C++ 面向对象 virtual override final</div>
+      <div class="title">Linux C++ valgrind 内存分析</div>
       <div class="meta">
         <span class="item">
           <span class="iconfont icon-time-circle"></span>
-          <span>2020/05/05</span>
+          <span>2020/06/14</span>
         </span>
 
         
-          <span class="item leancloud-visitors" id="/2020/05/05/c++/5_virtual_override_final/" data-flag-title="C++ 面向对象 virtual override final">
+          <span class="item leancloud-visitors" id="/2020/06/14/linux/7_valgrind/" data-flag-title="Linux C++ valgrind 内存分析">
             <span class="iconfont icon-eye1"></span>
             <span class="leancloud-visitors-count"></span>
           </span>
@@ -205,6 +200,10 @@
                     <a href="/tags/CPP">CPP</a>
                   
                 
+                  
+                    <a href="/tags/Linux">Linux</a>
+                  
+                
             </span>
           </span>
          
@@ -212,85 +211,148 @@
       <div>
       </div>
     </div>
-    <h1 id="1-virtual">1. virtual<a class="post-anchor" href="#1-virtual"></a></h1><blockquote>
-<p>虚函数是可在子类中覆盖其行为的成员函数。</p>
+    <blockquote>
+<p>valgrind：用于分析 C++ 程序内存使用的异常情况，比如内存泄漏、越界访问、未初始化</p>
 </blockquote>
-<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Base</span> &#123;</span>
-   <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">f</span><span class="hljs-params">()</span> </span>&#123;
-       <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"base\n"</span>;
-   &#125;
-&#125;;
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Derived</span> :</span> Base &#123;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f</span><span class="hljs-params">()</span> override </span>&#123; <span class="hljs-comment">// 'override' 可选</span>
-        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"derived\n"</span>;
+<pre><code class="hljs c++"><span class="hljs-comment">// main.cpp</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print_usage</span><span class="hljs-params">(<span class="hljs-keyword">char</span> * argv)</span> </span>&#123;
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"usage: "</span> &lt;&lt; argv &lt;&lt; <span class="hljs-string">" 1|2|3"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+&#125;
+
+<span class="hljs-comment">// 内存泄漏</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f1</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> *<span class="hljs-built_in">array</span> = (<span class="hljs-keyword">int</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>));
+&#125;
+
+<span class="hljs-comment">// 越界访问</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f2</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v(<span class="hljs-number">10</span>, <span class="hljs-number">0</span>);
+    <span class="hljs-built_in">cout</span> &lt;&lt; v[<span class="hljs-number">10</span>] &lt;&lt; <span class="hljs-built_in">endl</span>;
+&#125;
+
+<span class="hljs-comment">// 未初始化</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f3</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> x;
+    <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span>) &#123;
+        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"X is zero"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
     &#125;
-&#125;;
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
-</span>&#123;
-    Base b;
-    Derived d;
- 
-    <span class="hljs-comment">// 通过引用调用虚函数</span>
-    Base&amp; br = b; <span class="hljs-comment">// br 的类型是 Base&amp;</span>
-    Base&amp; dr = d; <span class="hljs-comment">// dr 的类型也是 Base&amp;</span>
-    br.f();       <span class="hljs-comment">// 打印 "base"</span>
-    dr.f();       <span class="hljs-comment">// 打印 "derived"</span>
- 
-    <span class="hljs-comment">// 通过指针调用虚函数</span>
-    Base* bp = &amp;b; <span class="hljs-comment">// bp 的类型是 Base*</span>
-    Base* dp = &amp;d; <span class="hljs-comment">// dp 的类型也是 Base*</span>
-    bp-&gt;f();       <span class="hljs-comment">// 打印 "base"</span>
-    dp-&gt;f();       <span class="hljs-comment">// 打印 "derived"</span>
- 
-    <span class="hljs-comment">// 非虚函数调用</span>
-    br.Base::f(); <span class="hljs-comment">// 打印 "base"</span>
-    dr.Base::f(); <span class="hljs-comment">// 打印 "base"</span>
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span>* argv[])</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (argc &lt; <span class="hljs-number">2</span>) &#123;
+        print_usage(argv[<span class="hljs-number">0</span>]);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    &#125;
+
+    <span class="hljs-keyword">switch</span> (atoi(argv[<span class="hljs-number">1</span>])) &#123;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+            f1();
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:
+            f2();
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:
+            f3();
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">default</span>:
+            print_usage(argv[<span class="hljs-number">0</span>]);
+            <span class="hljs-keyword">break</span>;
+    &#125;
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 &#125;</code></pre>
 
-
-
-<h1 id="2-override">2. override<a class="post-anchor" href="#2-override"></a></h1><blockquote>
-<p>指定一个虚函数覆盖另一个虚函数。</p>
+<blockquote>
+<p>编译、运行</p>
 </blockquote>
-<pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">A</span>
-&#123;</span>
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bar</span><span class="hljs-params">()</span></span>;
-&#125;;
- 
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">B</span> :</span> A
-&#123;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> override</span>; <span class="hljs-comment">// 错误：B::foo 不覆盖 A::foo</span>
-                               <span class="hljs-comment">// （签名不匹配）</span>
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> override</span>;       <span class="hljs-comment">// OK：B::foo 覆盖 A::foo</span>
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bar</span><span class="hljs-params">()</span> override</span>;       <span class="hljs-comment">// 错误：A::bar 非虚</span>
-&#125;;</code></pre>
+<pre><code class="hljs shell">[root] # 需要 -g 编译，才能使用 valgrind
+[root] g++ -g main.cpp
 
+[root] # 内存泄漏，提示 definitely lost: 4 bytes in 1 blocks
+[root] valgrind --tool=memcheck --leak-check=full ./a.out 1
+==24313== Memcheck, a memory error detector
+==24313== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==24313== Using Valgrind-3.16.0 and LibVEX; rerun with -h for copyright info
+==24313== Command: ./a.out 1
+==24313== 
+==24313== 
+==24313== HEAP SUMMARY:
+==24313==     in use at exit: 4 bytes in 1 blocks
+==24313==   total heap usage: 1 allocs, 0 frees, 4 bytes allocated
+==24313== 
+==24313== 4 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==24313==    at 0x4C29F33: malloc (vg_replace_malloc.c:307)
+==24313==    by 0x400AD4: f1() (main.cpp:13)
+==24313==    by 0x400C0B: main (main.cpp:38)
+==24313== 
+==24313== LEAK SUMMARY:
+==24313==    definitely lost: 4 bytes in 1 blocks
+==24313==    indirectly lost: 0 bytes in 0 blocks
+==24313==      possibly lost: 0 bytes in 0 blocks
+==24313==    still reachable: 0 bytes in 0 blocks
+==24313==         suppressed: 0 bytes in 0 blocks
+==24313== 
+==24313== For lists of detected and suppressed errors, rerun with: -s
+==24313== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
 
+[root] # 越界访问，提示 Invalid read of size 4
+[root] valgrind --tool=memcheck --leak-check=full ./a.out 2
+==24463== Memcheck, a memory error detector
+==24463== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==24463== Using Valgrind-3.16.0 and LibVEX; rerun with -h for copyright info
+==24463== Command: ./a.out 2
+==24463== 
+==24463== Invalid read of size 4
+==24463==    at 0x400B2A: f2() (main.cpp:19)
+==24463==    by 0x400C12: main (main.cpp:41)
+==24463==  Address 0x5a23068 is 0 bytes after a block of size 40 alloc'd
+==24463==    at 0x4C2A553: operator new(unsigned long) (vg_replace_malloc.c:342)
+==24463==    by 0x4010B5: __gnu_cxx::new_allocator&lt;int&gt;::allocate(unsigned long, void const*) (new_allocator.h:104)
+==24463==    by 0x400FB2: std::_Vector_base&lt;int, std::allocator&lt;int&gt; &gt;::_M_allocate(unsigned long) (stl_vector.h:168)
+==24463==    by 0x400E90: void std::vector&lt;int, std::allocator&lt;int&gt; &gt;::_M_initialize_dispatch&lt;int&gt;(int, int, std::__true_type) (stl_vector.h:1163)
+==24463==    by 0x400CFA: std::vector&lt;int, std::allocator&lt;int&gt; &gt;::vector&lt;int&gt;(int, int, std::allocator&lt;int&gt; const&amp;) (stl_vector.h:404)
+==24463==    by 0x400B0C: f2() (main.cpp:18)
+==24463==    by 0x400C12: main (main.cpp:41)
+==24463== 
+0
+==24463== 
+==24463== HEAP SUMMARY:
+==24463==     in use at exit: 0 bytes in 0 blocks
+==24463==   total heap usage: 1 allocs, 1 frees, 40 bytes allocated
+==24463== 
+==24463== All heap blocks were freed -- no leaks are possible
+==24463== 
+==24463== For lists of detected and suppressed errors, rerun with: -s
+==24463== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
 
-<h1 id="3-final">3. final<a class="post-anchor" href="#3-final"></a></h1><blockquote>
-<p>指定某个虚函数不能在子类中被覆盖，或者某个类不能被子类继承。</p>
-</blockquote>
-<pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Base</span>
-&#123;</span>
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span></span>;
-&#125;;
- 
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">A</span> :</span> Base
-&#123;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> final</span>;    <span class="hljs-comment">// Base::foo 被覆盖而 A::foo 是最终覆盖函数</span>
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bar</span><span class="hljs-params">()</span> final</span>;    <span class="hljs-comment">// 错误： bar 不能为 final 因为它非虚</span>
-&#125;;
- 
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">B</span> <span class="hljs-title">final</span> :</span> A       <span class="hljs-comment">// struct B 为 final</span>
-&#123;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> override</span>; <span class="hljs-comment">// 错误：foo 不能被覆盖，因为它在 A 中是 final</span>
-&#125;;
- 
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">C</span> :</span> B             <span class="hljs-comment">// 错误：B 为 final</span>
-&#123;
-&#125;;</code></pre>
+[root] # 未初始化，提示 Conditional jump or move depends on uninitialised value(s)
+[root] valgrind --tool=memcheck --leak-check=full ./a.out 3
+==24572== Memcheck, a memory error detector
+==24572== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==24572== Using Valgrind-3.16.0 and LibVEX; rerun with -h for copyright info
+==24572== Command: ./a.out 3
+==24572== 
+==24572== Conditional jump or move depends on uninitialised value(s)
+==24572==    at 0x400B9A: f3() (main.cpp:25)
+==24572==    by 0x400C19: main (main.cpp:44)
+==24572== 
+X is zero
+==24572== 
+==24572== HEAP SUMMARY:
+==24572==     in use at exit: 0 bytes in 0 blocks
+==24572==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==24572== 
+==24572== All heap blocks were freed -- no leaks are possible
+==24572== 
+==24572== Use --track-origins=yes to see where uninitialised values come from
+==24572== For lists of detected and suppressed errors, rerun with: -s
+==24572== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)</code></pre>
 
 
 
@@ -318,12 +380,12 @@
   <div class="post-guide">
     <div class="item left">
         
-          <a href="/2020/05/09/linux/1_clear_log/">Linux 清空日志文件</a>
+          <a href="/2020/06/14/linux/6_trap/">Linux trap</a>
         
     </div>
     <div class="item right">
         
-          <a href="/2020/05/03/lucene_cpp/2_util/">Lucene C++ 版本实现（二）util</a>
+          <a href="/2020/06/14/linux/5_awk/">Linux awk</a>
         
     </div>
   </div>
@@ -335,7 +397,7 @@
       本文作者：<a href="https://zengliangju.github.io">孤影渐苍茫、</a>
     </div>
     <div class="link">
-      永久链接：<a href="https://zengliangju.github.io/2020/05/05/c++/5_virtual_override_final/">https://zengliangju.github.io/2020/05/05/c++/5_virtual_override_final/</a>
+      永久链接：<a href="https://zengliangju.github.io/2020/06/14/linux/7_valgrind/">https://zengliangju.github.io/2020/06/14/linux/7_valgrind/</a>
     </div>
     <div class="declare">
       版权声明：本文首发于<a href="https://zengliangju.github.io">孤影渐苍茫、</a>的博客，转载请注明出处！

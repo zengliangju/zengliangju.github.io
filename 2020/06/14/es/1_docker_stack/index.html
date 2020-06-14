@@ -16,7 +16,7 @@
     <meta name="description" content="" />
     
     <title>
-      归档 - 我的博客
+      Elasticsearch docker stack 集群部署 - 我的博客
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/images/logo.ico" type="image/x-icon" />
@@ -58,7 +58,7 @@
           首页
         </a>
         
-        <a href="/archives" class="current">
+        <a href="/archives" class="">
           归档
         </a>
         
@@ -112,7 +112,7 @@
             首页
           </a>
           
-          <a href="/archives" class="current">
+          <a href="/archives" class="">
             归档
           </a>
           
@@ -161,124 +161,196 @@
     </div>
     <div id="container">
       <div class="main animated bounceInRight delay-0.7s">
-        <div id="archives">
-    
-        <div class="title">
-            归档 
-            
-        </div>
-    
-
-
-
-
-    
-    
-    <section class="wrap">
-        <div class="meta">
-            <a href="/archives/2020" >
-                2020
-            </a>
-        </div>
-        <div class="year">
-            
-            <article class="item">
-            <a href="/2020/06/14/tmp/" title="tmp">
-                <span>2020/06/14</span>
-                <span>tmp</span>
-            </a>
-            </article>
-            
-
-
-            <article class="item">
-            <a href="/2020/06/14/c++/10_protobuf/" title="C++ protobuf 的原理及优点">
-                <span>2020/06/14</span>
-                <span>C++ protobuf 的原理及优点</span>
-            </a>
-            </article>
-            
-
-
-            <article class="item">
-            <a href="/2020/06/14/c++/9_marco/" title="C++ marco 字符串拼接">
-                <span>2020/06/14</span>
-                <span>C++ marco 字符串拼接</span>
-            </a>
-            </article>
-            
-
-
-            <article class="item">
-            <a href="/2020/06/14/c++/8_boost_asio/" title="C++ boost asio">
-                <span>2020/06/14</span>
-                <span>C++ boost asio</span>
-            </a>
-            </article>
-            
-
-
-            <article class="item">
-            <a href="/2020/06/14/c++/7_brpc_server/" title="C++ brpc server">
-                <span>2020/06/14</span>
-                <span>C++ brpc server</span>
-            </a>
-            </article>
-            
-
-
-            <article class="item">
-            <a href="/2020/06/14/linux/8_perf/" title="Linux C++ perf 性能分析">
-                <span>2020/06/14</span>
-                <span>Linux C++ perf 性能分析</span>
-            </a>
-            </article>
-            
-
-
-            <article class="item">
-            <a href="/2020/06/14/es/1_docker_stack/" title="Elasticsearch docker stack 集群部署">
-                <span>2020/06/14</span>
-                <span>Elasticsearch docker stack 集群部署</span>
-            </a>
-            </article>
-            
-
-
-            <article class="item">
-            <a href="/2020/06/14/linux/6_trap/" title="Linux trap">
-                <span>2020/06/14</span>
-                <span>Linux trap</span>
-            </a>
-            </article>
-            
-
-
-            <article class="item">
-            <a href="/2020/06/14/linux/7_valgrind/" title="Linux C++ valgrind 内存分析">
-                <span>2020/06/14</span>
-                <span>Linux C++ valgrind 内存分析</span>
-            </a>
-            </article>
-            
-
-
-            <article class="item">
-            <a href="/2020/06/14/linux/5_awk/" title="Linux awk">
-                <span>2020/06/14</span>
-                <span>Linux awk</span>
-            </a>
-            </article>
-            
-    
-        </div>
-    </section>
+        <article class="post-entry">
+    <div class="header">
       
-<div class="paginator">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a>
-</div>
-</div>
+      <div class="title">Elasticsearch docker stack 集群部署</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/06/14</span>
+        </span>
 
+        
+          <span class="item leancloud-visitors" id="/2020/06/14/es/1_docker_stack/" data-flag-title="Elasticsearch docker stack 集群部署">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/学习">学习</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/ES">ES</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <blockquote>
+<p>docker-compose.yml</p>
+</blockquote>
+<pre><code class="hljs dockerfile">version: <span class="hljs-string">'2.2'</span>
+services:
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:<span class="hljs-number">7.5</span>.<span class="hljs-number">2</span>
+    container_name: es01
+    environment:
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=es02,es03
+      - cluster.initial_master_nodes=es01,es02,es03
+      - bootstrap.memory_lock=true
+      - <span class="hljs-string">"ES_JAVA_OPTS=-Xms512m -Xmx512m"</span>
+    ulimits:
+      memlock:
+        soft: -<span class="hljs-number">1</span>
+        hard: -<span class="hljs-number">1</span>
+    volumes:
+      - data01:/usr/share/elasticsearch/data
+    ports:
+      - <span class="hljs-number">9200</span>:<span class="hljs-number">9200</span>
+    networks:
+      - elastic
+  es02:
+    image: docker.elastic.co/elasticsearch/elasticsearch:<span class="hljs-number">7.5</span>.<span class="hljs-number">2</span>
+    container_name: es02
+    environment:
+      - node.name=es02
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=es01,es03
+      - cluster.initial_master_nodes=es01,es02,es03
+      - bootstrap.memory_lock=true
+      - <span class="hljs-string">"ES_JAVA_OPTS=-Xms512m -Xmx512m"</span>
+    ulimits:
+      memlock:
+        soft: -<span class="hljs-number">1</span>
+        hard: -<span class="hljs-number">1</span>
+    volumes:
+      - data02:/usr/share/elasticsearch/data
+    networks:
+      - elastic
+  es03:
+    image: docker.elastic.co/elasticsearch/elasticsearch:<span class="hljs-number">7.5</span>.<span class="hljs-number">2</span>
+    container_name: es03
+    environment:
+      - node.name=es03
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=es01,es02
+      - cluster.initial_master_nodes=es01,es02,es03
+      - bootstrap.memory_lock=true
+      - <span class="hljs-string">"ES_JAVA_OPTS=-Xms512m -Xmx512m"</span>
+    ulimits:
+      memlock:
+        soft: -<span class="hljs-number">1</span>
+        hard: -<span class="hljs-number">1</span>
+    volumes:
+      - data03:/usr/share/elasticsearch/data
+    networks:
+      - elastic
+
+volumes:
+  data01:
+    driver: local
+  data02:
+    driver: local
+  data03:
+    driver: local
+
+networks:
+  elastic:
+    driver: bridge</code></pre>
+
+<blockquote>
+<p>创建/启动集群</p>
+</blockquote>
+<pre><code class="hljs shell">docker-compose up</code></pre>
+
+<blockquote>
+<p>测试结果</p>
+</blockquote>
+<pre><code class="hljs shell">curl -X GET "localhost:9200/_cat/nodes?v&amp;pretty"</code></pre>
+
+<blockquote>
+<p>停止集群</p>
+</blockquote>
+<pre><code class="hljs shell">docker-compose down</code></pre>
+
+
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/logo_zeng.jpeg" target="_block" class="bg" style="background-image:url('/images/logo_zeng.jpeg')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/logo_zeng.jpeg" target="_block" class="bg" style="background-image:url('/images/logo_zeng.jpeg')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2020/06/14/linux/8_perf/">Linux C++ perf 性能分析</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/06/14/linux/6_trap/">Linux trap</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://zengliangju.github.io">孤影渐苍茫、</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://zengliangju.github.io/2020/06/14/es/1_docker_stack/">https://zengliangju.github.io/2020/06/14/es/1_docker_stack/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://zengliangju.github.io">孤影渐苍茫、</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
         <footer>
           <div class="copyright">
             ©2020
