@@ -226,9 +226,9 @@
 <p>​        比如对于 int32 类型的数字，一般需要 4 个 byte 来表示。但是采用 Varint，对于很小的 int32 类型的数字，则可以用 1 个 byte 来表示。当然凡事都有好的也有不好的一面，采用 Varint 表示法，大的数字则需要 5 个 byte 来表示。从统计的角度来说，一般不会所有的消息中的数字都是大数，因此大多数情况下，采用 Varint 后，可以用更少的字节数来表示数字信息。下面就详细介绍一下 Varint。</p>
 <p>​        Varint 中的每个 byte 的最高位 bit 有特殊的含义，如果该位为 1，表示后续的 byte 也是该数字的一部分，如果该位为 0，则结束。其他的 7 个 bit 都用来表示数字。因此小于 128 的数字都可以用一个 byte 表示。大于 128 的数字，比如 300，会用两个字节来表示：1010 1100 0000 0010</p>
 <p>​        下图演示了 Google Protocol Buffer 如何解析两个 bytes。注意到最终计算前将两个 byte 的位置相互交换过一次，这是因为 Google Protocol Buffer 字节序采用 little-endian 的方式。</p>
-<p><a href="/images/protobuf_1.jpeg" data-caption="图1" data-fancybox="images"><img src="/images/protobuf_1.jpeg" alt="图1"></a></p>
+<p><a href="/images/protobuf_1.jpg" data-caption="图1" data-fancybox="images"><img src="/images/protobuf_1.jpg" alt="图1"></a></p>
 <p>消息经过序列化后会成为一个二进制数据流，该流中的数据为一系列的 Key-Value 对。如下图所示：</p>
-<p><a href="/images/protobuf_2.jpeg" data-caption="图2" data-fancybox="images"><img src="/images/protobuf_2.jpeg" alt="图2"></a></p>
+<p><a href="/images/protobuf_2.jpg" data-caption="图2" data-fancybox="images"><img src="/images/protobuf_2.jpg" alt="图2"></a></p>
 <p>​        采用这种 Key-Pair 结构无需使用分隔符来分割不同的 Field。对于可选的 Field，如果消息中不存在该 field，那么在最终的 Message Buffer 中就没有该 field，这些特性都有助于节约消息本身的大小。</p>
 <p>​        Key 用来标识具体的 field，在解包的时候，Protocol Buffer 根据 Key 就可以知道相应的 Value 应该对应于消息中的哪一个 field。</p>
 <p>​        Key 的定义：<code>(field_number &lt;&lt; 3) | wire_type</code></p>
@@ -277,7 +277,7 @@
 <p>​        在计算机内，一个负数一般会被表示为一个很大的整数，因为计算机定义负数的符号位为数字的最高位。如果采用 Varint 表示一个负数，那么一定需要 5 个 byte。为此 Google Protocol Buffer 定义了 sint32 这种类型，采用 zigzag 编码。</p>
 <p>​        Zigzag 编码用无符号数来表示有符号数字，正数和负数交错，这就是 zigzag 这个词的含义了。</p>
 <p>​        如图所示：</p>
-<p><a href="/images/protobuf_3.jpeg" data-caption="图3" data-fancybox="images"><img src="/images/protobuf_3.jpeg" alt="图3"></a></p>
+<p><a href="/images/protobuf_3.jpg" data-caption="图3" data-fancybox="images"><img src="/images/protobuf_3.jpg" alt="图3"></a></p>
 <p>​        使用 zigzag 编码，绝对值小的数字，无论正负都可以采用较少的 byte 来表示，充分利用了 Varint 这种技术。</p>
 <p>​        其他的数据类型，比如字符串等则采用类似数据库中的 varchar 的表示方法，即用一个 varint 表示长度，然后将其余部分紧跟在这个长度部分之后即可。</p>
 <h4 id="2-2-Decoding">2.2 Decoding<a class="post-anchor" href="#2-2-Decoding"></a></h4><p>​        首先我们来了解一下 XML 的封解包过程。XML 需要从文件中读取出字符串，再转换为 XML 文档对象结构模型。之后，再从 XML 文档对象结构模型中读取指定节点的字符串，最后再将这个字符串转换成指定类型的变量。这个过程非常复杂，其中将 XML 文件转换为文档对象结构模型的过程通常需要完成词法文法分析等大量消耗 CPU 的复杂计算。</p>
