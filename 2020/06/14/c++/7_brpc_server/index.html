@@ -208,8 +208,22 @@
       </div>
     </div>
     <blockquote>
-<p>to be continued.</p>
+<p>下面示例来自：<a href="https://github.com/apache/incubator-brpc/tree/master/example/echo_c%2B%2B" target="_blank" rel="noopener">https://github.com/apache/incubator-brpc/tree/master/example/echo_c%2B%2B</a></p>
 </blockquote>
+<pre><code class="hljs shell">[root] bazel build //example:echo_c++_server
+[root] ./bazel-bin/example/echo_c++_server
+I0626 16:41:38.072270  8263 src/brpc/server.cpp:1045] Server[example::EchoServiceImpl] is serving on port=8000.
+I0626 16:41:38.072718  8263 src/brpc/server.cpp:1048] Check out http://VM_0_17_centos:8000 in web browser.
+I0626 16:43:38.988697  8267 example/echo_c++/server.cpp:54] Received request[log_id=0] from 127.0.0.1:33862 to 127.0.0.1:8000: hello world (attached=)
+I0626 16:43:39.990460  8269 example/echo_c++/server.cpp:54] Received request[log_id=1] from 127.0.0.1:33862 to 127.0.0.1:8000: hello world (attached=)
+I0626 16:43:40.991046  8269 example/echo_c++/server.cpp:54] Received request[log_id=2] from 127.0.0.1:33862 to 127.0.0.1:8000: hello world (attached=)</code></pre>
+
+<pre><code class="hljs shell">[root] bazel build //example:echo_c++_client
+[root] ./bazel-bin/example/echo_c++_client
+I0626 16:43:38.989928  9218 example/echo_c++/client.cpp:78] Received response from 0.0.0.0:8000 to 127.0.0.1:33862: hello world (attached=) latency=48090us
+I0626 16:43:39.990683  9218 example/echo_c++/client.cpp:78] Received response from 0.0.0.0:8000 to 127.0.0.1:33862: hello world (attached=) latency=491us
+I0626 16:43:40.991231  9218 example/echo_c++/client.cpp:78] Received response from 0.0.0.0:8000 to 127.0.0.1:33862: hello world (attached=) latency=390us</code></pre>
+
 
 
   

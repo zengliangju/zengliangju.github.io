@@ -16,7 +16,7 @@
     <meta name="description" content="" />
     
     <title>
-      Linux awk - 我的博客
+      Linux shell 锁的使用 - 我的博客
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/images/logo.ico" type="image/x-icon" />
@@ -164,15 +164,15 @@
         <article class="post-entry">
     <div class="header">
       
-      <div class="title">Linux awk</div>
+      <div class="title">Linux shell 锁的使用</div>
       <div class="meta">
         <span class="item">
           <span class="iconfont icon-time-circle"></span>
-          <span>2020/06/14</span>
+          <span>2020/06/26</span>
         </span>
 
         
-          <span class="item leancloud-visitors" id="/2020/06/14/linux/5_awk/" data-flag-title="Linux awk">
+          <span class="item leancloud-visitors" id="/2020/06/26/linux/9_flock/" data-flag-title="Linux shell 锁的使用">
             <span class="iconfont icon-eye1"></span>
             <span class="leancloud-visitors-count"></span>
           </span>
@@ -200,6 +200,10 @@
                     <a href="/tags/Linux">Linux</a>
                   
                 
+                  
+                    <a href="/tags/Shell">Shell</a>
+                  
+                
             </span>
           </span>
          
@@ -207,17 +211,25 @@
       <div>
       </div>
     </div>
-    <pre><code class="hljs shell">[root] awk -F' ' '&#123;printf "%-5s\t%-5s\n",$2,$1&#125;' file.txt
-1       zeng 
-3       liang
-2       ju</code></pre>
-
-<blockquote>
-<p>file.txt</p>
+    <blockquote>
+<p>flock - manage locks from shell scripts</p>
 </blockquote>
-<pre><code class="hljs shell">zeng 1
-liang 3
-ju 2</code></pre>
+<p>参数含义：</p>
+<pre><code class="hljs shell">OPTIONS
+       -c, --command command
+              Pass a single command, without arguments, to the shell with
+              -c.
+
+       -e, -x, --exclusive
+              Obtain an exclusive lock, sometimes called a write lock.  This
+              is the default.
+
+       -n, --nb, --nonblock
+              Fail rather than wait if the lock cannot be immediately
+              acquired.  See the -E option for the exit status used.</code></pre>
+
+<p>示例：</p>
+<pre><code class="hljs shell">flock -xn /tmp/zeng.lock -c "top"</code></pre>
 
 
 
@@ -245,12 +257,10 @@ ju 2</code></pre>
   <div class="post-guide">
     <div class="item left">
         
-          <a href="/2020/06/14/linux/6_trap/">Linux trap</a>
-        
     </div>
     <div class="item right">
         
-          <a href="/2020/06/14/linux/4_sed/">Linux sed</a>
+          <a href="/2020/06/26/c++/11_bthread/">Bthread 的原理</a>
         
     </div>
   </div>
@@ -274,7 +284,7 @@ ju 2</code></pre>
       本文作者：<a href="https://zengliangju.github.io">孤影</a>
     </div>
     <div class="link">
-      永久链接：<a href="https://zengliangju.github.io/2020/06/14/linux/5_awk/">https://zengliangju.github.io/2020/06/14/linux/5_awk/</a>
+      永久链接：<a href="https://zengliangju.github.io/2020/06/26/linux/9_flock/">https://zengliangju.github.io/2020/06/26/linux/9_flock/</a>
     </div>
     <div class="declare">
       版权声明：本文首发于<a href="https://zengliangju.github.io">孤影</a>的博客，转载请注明出处！
